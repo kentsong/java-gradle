@@ -1,4 +1,4 @@
-package theaddeadlock;
+package lock;
 
 public class MayDeadLock {
 
