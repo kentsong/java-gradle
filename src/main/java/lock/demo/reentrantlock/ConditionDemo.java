@@ -13,9 +13,11 @@ public class ConditionDemo {
         System.out.println("method1 get lock");
         try {
             System.out.println(Thread.currentThread().getName() + ":条件不满足，开始await");
+            //当执行 condition.await() 会释放 lock
             condition.await();
             System.out.println(Thread.currentThread().getName() + ":条件满足了，开始执行后续");
         } finally {
+            System.out.println("method1 unlock");
             lock.unlock();
         }
     }
@@ -30,6 +32,7 @@ public class ConditionDemo {
             System.out.println(Thread.currentThread().getName() + ":准备完成，唤醒其他线程");
             condition.signal();
         } finally {
+            System.out.println("method2 unlock");
             lock.unlock();
         }
     }
