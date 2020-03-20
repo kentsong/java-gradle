@@ -67,9 +67,9 @@ public class ThreadWaitDemo {
         System.out.println("早上：");
         System.out.println("测试人员来上班了...");
         thread3.start();
-        System.out.println("产品经理来上班了...");
-        thread1.start();
         System.out.println("开发人员来上班了...");
         thread2.start();
+        System.out.println("产品经理来上班了...");
+        thread1.start();
     }
 }

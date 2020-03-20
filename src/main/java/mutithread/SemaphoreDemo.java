@@ -5,11 +5,13 @@ import java.util.concurrent.Semaphore;
 /**
  * @author wwj
  * 使用Sephmore(信号量)实现线程按顺序运行
+ *
+ * TODO 這個設計不對 Semaphore 是用來限制最多線程處理量的，不適合用來作依序執行的控制 by Kent
  */
 public class SemaphoreDemo {
     private static Semaphore semaphore1 = new Semaphore(1);
     private static Semaphore semaphore2 = new Semaphore(1);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         final Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -48,9 +50,9 @@ public class SemaphoreDemo {
         System.out.println("早上：");
         System.out.println("测试人员来上班了...");
         thread3.start();
-        System.out.println("产品经理来上班了...");
-        thread1.start();
         System.out.println("开发人员来上班了...");
         thread2.start();
+        System.out.println("产品经理来上班了...");
+        thread1.start();
     }
 }
