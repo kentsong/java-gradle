@@ -24,12 +24,14 @@ public class Center extends Thread {
     private final static int PRODUCERSLEEPSEED = 100;
     private final static int CONSUMERSLEEPSEED = 10000;
     private boolean isClose;
+    private MainListener mainListener;
 
-    public Center() {
+    public Center(MainListener listener) {
+        mainListener = listener;
         //创建10名提供服务的工作人员
-        this.waiters = new LinkedBlockingQueue<Waiter>(MAXCOUNT);
+        this.waiters = new LinkedBlockingQueue<Waiter>(10);
         for (int i = 0; i < MAXCOUNT; i++) {
-            waiters.add(new Waiter());
+            waiters.add(new Waiter(i+1));
         }
         //10名工作人员工作就绪,创建客户队列
         this.customers = new LinkedBlockingQueue<Customer>();
@@ -56,12 +58,14 @@ public class Center extends Thread {
             this.customers.remove(customer);
 
             // 窗口显示
-            System.out.println(waiter + "正在为" + customer + "服务...");
+            Log.info("waiter("+waiter.id+")"+ " 正在为 " + customer + " 服务...");
             TimeUnit.MILLISECONDS.sleep(rand.nextInt(CONSUMERSLEEPSEED));
+            Log.info(customer + " 服务结束...");
+            mainListener.printInfo();
 
             this.waiters.add(waiter);
         } catch (InterruptedException e) {
-            System.err.println("---" + e.getMessage());
+            Log.info("---" + e.getMessage());
         }
     }
 

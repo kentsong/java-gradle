@@ -7,6 +7,11 @@ import java.io.IOException;
 
 public class IOUtils {
 
+    /**
+     * https://www.jianshu.com/p/89a171f2d958
+     * @param args
+     */
+
     public static void main(String[] args) {
         Application app = new Application();
         String filePath = app.getFileFromResourcesPath("playinfo.xml");

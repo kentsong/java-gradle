@@ -13,11 +13,12 @@ public class DynamicProxy<T> {
     }
 
     //使用Proxy.newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler h)返回某个对象的代理对象
+
     /**
      * ClassLoader loader:Java类加载器; 可以通过这个类型的加载器，在程序运行时，将生成的代理类加载到JVM即Java虚拟机中，以便运行时需要！
      * Class<?>[] interfaces:被代理类的所有接口信息; 便于生成的代理类可以具有代理类接口中的所有方法
      * InvocationHandler h:调用处理器; 调用实现了InvocationHandler 类的一个回调方法
-     * */
+     */
     @SuppressWarnings("unchecked")
     public T getProxyObj() {
         return (T) Proxy.newProxyInstance(getClass().getClassLoader(), t.getClass().getInterfaces(), new InvocationHandler() {
@@ -38,10 +39,10 @@ public class DynamicProxy<T> {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 //在原方法前边动态插入代码
-                System.out.println("proxy point ===> pre invoke");
+                System.out.println("proxy point ===> pre invoke " + method.getName());
                 Object result = method.invoke(t, args);
                 //在原方法后边动态插入代码
-                System.out.println("proxy point ===> after invoke");
+                System.out.println("proxy point ===> after invoke " + method.getName());
                 return result;
             }
         });

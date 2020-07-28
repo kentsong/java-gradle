@@ -6,4 +6,9 @@ public class Hello implements IHello {
     public void hello() {
         System.out.println("hello world");
     }
+
+    @Override
+    public void move() {
+        System.out.println("dog is moving");
+    }
 }

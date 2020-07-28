@@ -8,14 +8,18 @@ package project.callnum;
  */
 public class Producer implements Runnable {
     private Center center;
+    private int Max;
+    private int num;
 
-    public Producer(Center center) {
+    public Producer(Center center, int max) {
         this.center = center;
+        this.Max = max;
     }
 
     @Override
     public void run() {
-        while (!center.isClose() && !Thread.interrupted()) {
+        while (!center.isClose() && !Thread.interrupted() && num < Max) {
+            num++;
             //产生客户
             center.produce();
         }

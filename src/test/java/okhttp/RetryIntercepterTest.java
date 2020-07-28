@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
-
 public class RetryIntercepterTest {
 
     String mUrl = "https://www.baidu.com/";
@@ -58,6 +56,14 @@ public class RetryIntercepterTest {
                 response = chain.proceed(request);
             }
             return response;
+        }
+    }
+
+    @Test
+    public void testFor(){
+
+        for (;;) {
+            System.out.println("111");
         }
     }
 
